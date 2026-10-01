@@ -11,8 +11,8 @@ BASE_DIR = Path(__file__).resolve().parent
 
 @st.cache_resource
 def load_model():
-    model = joblib.load(BASE_DIR / "spam_model.pkl")
-    vectorizer = joblib.load(BASE_DIR / "tfidf_vectorizer.pkl")
+    model = joblib.load(BASE_DIR / "spam_model_nn.pkl")
+    vectorizer = joblib.load(BASE_DIR / "tfidf_nn.pkl")
     return model, vectorizer
 
 
@@ -201,8 +201,8 @@ with st.expander("ℹ️ เกี่ยวกับโมเดลนี้"):
         """
 - **ข้อมูล:** UCI SMS Spam Collection (5,574 ข้อความภาษาอังกฤษ)
 - **วิธีแปลงข้อความ:** TF-IDF
-- **โมเดลที่ใช้:** Linear SVM (เลือกจากการเปรียบเทียบกับ Naive Bayes และ Logistic Regression)
-- **ผลบนชุดทดสอบ:** Accuracy 98.3% | Precision 95.8% | Recall 91.3% | F1 93.5%
+- **โมเดลที่ใช้:** Neural Network (MLP) บน TF-IDF 5,000 features แบ่งข้อมูล Train/Validate/Test = 70/15/15 และหยุดด้วย Early Stopping จาก Validation Loss
+- **ผลบนชุดทดสอบ (837 ข้อความ):** Accuracy 99.04% | Precision 98.15% | Recall 94.64% | F1 96.36%
 - **ข้อจำกัด:** รองรับภาษาอังกฤษเท่านั้น ข้อความสั้นมากอาจไม่แน่นอน และ spam
   รูปแบบใหม่ (เช่น ลิงก์หลอก) อาจจับไม่ได้
         """
